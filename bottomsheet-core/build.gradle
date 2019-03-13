@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 28
@@ -23,12 +22,10 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.0.2'
 }
 
-publish {
-    userOrg = 'flipboard'
-    groupId = 'com.flipboard'
-    artifactId = 'bottomsheet-core'
-    publishVersion = VERSION
-    desc = 'Android component which presents a dismissible view from the bottom of the screen'
-    website = 'https://github.com/Flipboard/bottomsheet'
-    licences = ['BSD 3-Clause']
+ext {
+    PUBLISH_GROUP_ID = 'com.github.pavlospt'
+    PUBLISH_ARTIFACT_ID = 'bottomsheet-core'
+    PUBLISH_VERSION = version
 }
+
+apply from: 'https://raw.githubusercontent.com/pavlospt/release-android-library/master/android-release-aar.gradle'

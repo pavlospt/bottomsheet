@@ -7,14 +7,21 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.0-rc01'
-        classpath 'com.novoda:bintray-release:0.9'
     }
 }
 
 allprojects {
     repositories {
         google()
+        maven { url "https://dl.bintray.com/pavlospt/android-libraries/" }
         jcenter()
+    }
+}
+
+subprojects {
+    if (!project.name.contains('sample')) {
+        project.group = GROUP
+        project.version = VERSION_NAME
     }
 }
 
