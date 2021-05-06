@@ -31,6 +31,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,9 +82,11 @@ public class ImagePickerSheetView extends FrameLayout {
         public static final int CAMERA = 2;
         public static final int PICKER = 3;
 
+        @Retention(RetentionPolicy.SOURCE)
         @IntDef({IMAGE, CAMERA, PICKER})
         public @interface TileType {}
 
+        @Retention(RetentionPolicy.SOURCE)
         @IntDef({CAMERA, PICKER})
         public @interface SpecialTileType {}
 

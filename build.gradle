@@ -1,12 +1,11 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0-rc01'
+        classpath 'com.android.tools.build:gradle:4.2.0'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.15.1'
     }
 }
 
@@ -14,45 +13,7 @@ allprojects {
     repositories {
         google()
         maven { url "https://dl.bintray.com/pavlospt/android-libraries/" }
-        jcenter()
-    }
-}
-
-subprojects {
-    if (!project.name.contains('sample')) {
-        project.group = GROUP
-        project.version = VERSION_NAME
-    }
-}
-
-ext {
-    VERSION = version()
-}
-
-task bumpMajor {
-    doLast {
-        ant.propertyfile(file: 'version.properties') {
-            entry(key: 'major', type: 'int', operation: '+', value: 1)
-            entry(key: 'minor', type: 'int', operation: '=', value: 0)
-            entry(key: 'patch', type: 'int', operation: '=', value: 0)
-        }
-    }
-}
-
-task bumpMinor {
-    doLast {
-        ant.propertyfile(file: 'version.properties') {
-            entry(key: 'minor', type: 'int', operation: '+', value: 1)
-            entry(key: 'patch', type: 'int', operation: '=', value: 0)
-        }
-    }
-}
-
-task bumpPatch {
-    doLast {
-        ant.propertyfile(file: 'version.properties') {
-            entry(key: 'patch', type: 'int', operation: '+', value: 1)
-        }
+        mavenCentral()
     }
 }
 
@@ -62,18 +23,4 @@ task genReadMe {
         def result = template.replaceAll("%%version%%", version())
         file("README.md").withWriter{ it << result }
     }
-}
-
-task version {
-    doLast {
-        println version()
-    }
-}
-
-String version() {
-    def versionPropsFile = file('version.properties')
-    Properties versionProps = new Properties()
-    versionProps.load(new FileInputStream(versionPropsFile))
-
-    return versionProps['major'] + "." + versionProps['minor'] + "." + versionProps['patch']
 }

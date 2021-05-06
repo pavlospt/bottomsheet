@@ -1,11 +1,12 @@
 apply plugin: 'com.android.library'
+apply plugin: "com.vanniktech.maven.publish"
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 30
     }
     lintOptions {
           abortOnError false
@@ -19,13 +20,5 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.annotation:annotation:1.0.2'
+    implementation 'androidx.annotation:annotation:1.2.0'
 }
-
-ext {
-    PUBLISH_GROUP_ID = 'com.github.pavlospt'
-    PUBLISH_ARTIFACT_ID = 'bottomsheet-core'
-    PUBLISH_VERSION = version
-}
-
-apply from: 'https://raw.githubusercontent.com/pavlospt/release-android-library/master/android-release-aar.gradle'
